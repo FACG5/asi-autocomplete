@@ -1,0 +1,34 @@
+* {
+margin: 0;
+padding: 0;
+}
+
+.inputStyle {
+  height: 66px;
+  padding: 18px 27px;
+  font-size: 19px;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #bb6b00;
+    border-color: #bb6b00;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    user-select: none;
