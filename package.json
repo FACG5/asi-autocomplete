@@ -1,0 +1,23 @@
+{
+  "name": "asi-autocomplete",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node ./test/test.js | tap-spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "env2": "^2.2.2",
+    "nodemon": "^1.18.3",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
