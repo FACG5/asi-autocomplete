@@ -26,7 +26,8 @@ function serverStaticFile(req, res) {
     js: "application/javascript",
     ico: "image/x-icon",
     jpg: "image/jpg",
-    png: "image/png"
+    png: "image/png",
+    gif:"image/gif"
   };
   res.writeHead(200, {
     "content-type": contenttype[extention]

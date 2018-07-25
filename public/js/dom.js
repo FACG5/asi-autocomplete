@@ -10,6 +10,11 @@ for (let i = 1; i <= 10; i++) {
     }
     counter++;
     if (counter == 10) {
+      var loadingDiv= getElementById("loadingDiv");
+      loadingDiv.style.display="none";
+      var mainContainer = getElementById("MainContainerr");
+mainContainer.style.display="flex";
+
       sendData("/writeData", JSON.stringify(totalResult), function() {
         fetch("/autocomplete", function(fileText) {
           var arr = fileText;
@@ -20,7 +25,6 @@ for (let i = 1; i <= 10; i++) {
             var result = createElement("div");
             result.setAttribute("class", "result");
             result.setAttribute("id", "result");
-            var mainContainer = getElementById("MainContainerr");
             mainContainer.appendChild(result);
 
             var word = this.value;
