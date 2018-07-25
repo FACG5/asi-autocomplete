@@ -10,8 +10,18 @@ for (let i = 1; i <= 10; i++) {
     }
     counter++;
     if (counter == 10) {
+<<<<<<< HEAD
+      var loadingDiv= getElementById("loadingDiv");
+      loadingDiv.style.display="none";
+      var mainContainer = getElementById("MainContainerr");
+mainContainer.style.display="flex";
+
+      sendData("/writeData", JSON.stringify(totalResult), function() {
+        fetch("/autocomplete", function(fileText) {
+=======
       sendData("/writeData", JSON.stringify(totalResult), function () {
         fetch("/autocomplete", function (fileText) {
+>>>>>>> 04f47ffca1ead5788c8a2807790eabd6233c3cd2
           var arr = fileText;
           var input = getElementById("word");
 
@@ -20,7 +30,6 @@ for (let i = 1; i <= 10; i++) {
             var result = createElement("div");
             result.setAttribute("class", "result");
             result.setAttribute("id", "result");
-            var mainContainer = getElementById("MainContainerr");
             mainContainer.appendChild(result);
 
             var word = this.value;
