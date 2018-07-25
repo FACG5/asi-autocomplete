@@ -1,14 +1,15 @@
-var{serverStaticFile,handelhomepage,autocomplete,handelError}=require("./functions.js")
+var {serverStaticFile,handelhomepage,autocomplete,handelError} = require("./functions.js")
+
 function router(req, res) {
-  var endpoint = req.url;
+  let endpoint = req.url;
   if (endpoint === "/") {
     handelhomepage(req, res);
-}
+} // end home page
   else if (endpoint==="/autocomplete"){
   autocomplete(req,res);
-  }else {
+  } else {
     serverStaticFile(req, res);
   }
-}
+} //end router function 
 
 module.exports=router;

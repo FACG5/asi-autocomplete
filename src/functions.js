@@ -6,10 +6,8 @@ function handelhomepage(req, res) {
     res.writeHead(200, { "content-type": "text/html" });
     fs.readFile(path.join(__dirname ,"..","public","index.html"), function(err, file) {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
-        console.log(__dirname);
-
         res.end(file);
       }
     });
@@ -23,14 +21,14 @@ function handelhomepage(req, res) {
       css: "text/css",
       js: "application/javascript",
       ico: "image/x-icon",
-      jpg: "image/jpg"
+      jpg: "image/jpg",
+      png: "image/png"
     };
     res.writeHead(200, { "content-type": contenttype[extention] });
     fs.readFile(path.join(__dirname,"..","public", endponit), function(err, file) {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
-        console.log(__dirname);
         res.end(file);
       }
     });
@@ -40,10 +38,8 @@ function handelhomepage(req, res) {
     res.writeHead(200, { "content-type": "text/plain" });
     fs.readFile(path.join(__dirname , ".","Data","shortList.txt"), function(err, file) {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
-        console.log(__dirname);
-
         res.end(file);
       }
     });
@@ -51,7 +47,7 @@ function handelhomepage(req, res) {
   }
   function handelError(res){
       res.writeHead(404, { "content-type": "text/html" });
-      res.end("<h1>page not found 404 </h1>");
+      res.end("<h1>page not found --404-- </h1>");
   }
 
   module.exports = {handelError,handelhomepage,autocomplete,serverStaticFile};
