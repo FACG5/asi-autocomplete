@@ -62,6 +62,11 @@ function clearDivAndSet(name, Text) {
   div.innerHTML = Text;
 }
 
+function filterArray(array){
+  return array.filter(function(item, pos) {
+    return array.indexOf(item) == pos;
+})
+}
 
 if (module != "undefined") {
 
