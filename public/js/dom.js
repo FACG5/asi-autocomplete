@@ -10,16 +10,13 @@ for (let i = 1; i <= 10; i++) {
     }
     counter++;
     if (counter == 10) {
-
-
-      sendData("/writeData", JSON.stringify(totalResult), function () {
-        fetch("/autocomplete", function (fileText) {
+      sendData("/writeData", JSON.stringify(totalResult), function() {
+        fetch("/autocomplete", function(fileText) {
           var arr = fileText;
           var input = getElementById("word");
 
-          input.addEventListener("input", function (e) {
+          input.addEventListener("input", function(e) {
             removeDiv("result");
-
             var result = createElement("div");
             result.setAttribute("class", "result");
             result.setAttribute("id", "result");
@@ -31,7 +28,8 @@ for (let i = 1; i <= 10; i++) {
             for (let i = 0; i < arr.length; i++) {
               var word = this.value;
               if (
-                arr[i].substr(0, word.length).toUpperCase() == word.toUpperCase()
+                arr[i].substr(0, word.length).toUpperCase() ==
+                word.toUpperCase()
               ) {
                 // removeDiv("result")
                 var resultElemnt = createElement("div");
@@ -43,7 +41,7 @@ for (let i = 1; i <= 10; i++) {
                 inputElement.value = arr[i];
                 resultElemnt.appendChild(inputElement);
 
-                resultElemnt.addEventListener("click", function (e) {
+                resultElemnt.addEventListener("click", function(e) {
                   input.value = this.getElementsByTagName("input")[0].value; //return to above resultElemnt
 
                   removeDiv("result");
@@ -54,41 +52,37 @@ for (let i = 1; i <= 10; i++) {
           });
 
           var submit = getElementById("submit");
-
-          submit.addEventListener("click", function (e) {
+          var info = createElement("div");
+          info.setAttribute("id", "info");
+          var modalContent = getElementById("modal-content");
+          submit.addEventListener("click", function(e) {
             e.preventDefault();
 
+            modalContent.appendChild(info);
             var name = input.value;
-            var url =
-              "http://extracts.panmacmillan.com/getextracts?authorcontains=" +
-              name;
-            fetch(url, function (result) {
-              var authorName = result.Extracts[0].author;
-              var authorBiography = result.Extracts[0].authorBiography;
-              console.log(0);
-              console.log(authorName);
-              console.log(authorBiography);
-              var modal = document.getElementById('myModal');
-              var span = document.getElementsByClassName("close")[0];
+            if (name) {
+              var url =
+                "http://extracts.panmacmillan.com/getextracts?authorcontains=" +
+                name;
+              fetch(url, function(result) {
+                if (result.PageCount != 0) {
+                  var authorName = result.Extracts[0].author;
+                  var authorBiography = result.Extracts[0].authorBiography;
+                  clearDivAndSet("info",authorBiography)
+                  showModel();
+                } else {
+                  clearDivAndSet("info","null")
 
-              modal.style.display = "block";
-              window.onclick = function (event) {
-                if (event.target == modal) {
-                  modal.style.display = "none";
+                  showModel();
                 }
-                span.onclick = function () {
-                  modal.style.display = "none";
-                }
-
-              }
-
-
-            });
+              });
+            } else {
+              clearDivAndSet("info","null")
+              showModel();
+            }
           });
         });
       });
     }
-
-
   });
 }
