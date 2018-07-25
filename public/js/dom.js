@@ -4,7 +4,7 @@ for (let i = 1; i <= 10; i++) {
   var apiUrl =
     "http://extracts.panmacmillan.com/getextracts?authorcontains=a&pagenumber=" +
     i;
-  fetch(apiUrl, function (result) {
+  fetch(apiUrl, function(result) {
     for (var j = 0; j < result.Extracts.length; j++) {
       totalResult.push(result.Extracts[j].author);
     }
@@ -31,10 +31,8 @@ for (let i = 1; i <= 10; i++) {
                 arr[i].substr(0, word.length).toUpperCase() ==
                 word.toUpperCase()
               ) {
-                // removeDiv("result")
                 var resultElemnt = createElement("div");
                 resultElemnt.setAttribute("class", "item");
-                // resultElemnt.setAttribute("class","resultElemnt");
                 resultElemnt.textContent = arr[i];
                 var inputElement = createElement("input");
                 inputElement.setAttribute("type", "hidden");
@@ -54,6 +52,7 @@ for (let i = 1; i <= 10; i++) {
           var submit = getElementById("submit");
           var info = createElement("div");
           info.setAttribute("id", "info");
+          info.setAttribute("class", "modal-body");
           var modalContent = getElementById("modal-content");
           submit.addEventListener("click", function(e) {
             e.preventDefault();
@@ -67,17 +66,23 @@ for (let i = 1; i <= 10; i++) {
               fetch(url, function(result) {
                 if (result.PageCount != 0) {
                   var authorName = result.Extracts[0].author;
+                  var span = createElement("span");
+                  span.setAttribute("class", "nameSpan");
+                  span.textContent = authorName;
+                  console.log(span);
                   var authorBiography = result.Extracts[0].authorBiography;
-                  clearDivAndSet("info",authorBiography)
+                  clearDivAndSet("info", authorBiography);
+                  info.insertBefore(span,info.childNodes[0])
+
                   showModel();
                 } else {
-                  clearDivAndSet("info","null")
+                  clearDivAndSet("info", "Author Not Found ! ");
 
                   showModel();
                 }
               });
             } else {
-              clearDivAndSet("info","null")
+              clearDivAndSet("info", "Please Enter Name ! ");
               showModel();
             }
           });
