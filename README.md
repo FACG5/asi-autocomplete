@@ -59,3 +59,7 @@ ___
 - [x] Use __module.exports__ and __require__ to break a single large server file into smaller modules.
 
 - [x] Consider what would be a good __server file structure__ .
+
+- [x] Design: aim for a responsive, mobile-first design.
+  
+- [x] Accessibility .
