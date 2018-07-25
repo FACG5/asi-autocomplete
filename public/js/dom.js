@@ -4,7 +4,7 @@ for (let i = 1; i <= 10; i++) {
   var apiUrl =
     "http://extracts.panmacmillan.com/getextracts?authorcontains=a&pagenumber=" +
     i;
-  fetch(apiUrl, function(result) {
+  fetch(apiUrl, function (result) {
     for (var j = 0; j < result.Extracts.length; j++) {
       totalResult.push(result.Extracts[j].author);
     }
