@@ -1,35 +1,170 @@
 * {
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: cairo;
 }
 
-.inputStyle {
-  height: 66px;
-  padding: 18px 27px;
-  font-size: 19px;
-  line-height: 1;
-  border-radius: 6px;
+::-webkit-scrollbar-track {
+    background-color: #f3ecec;
+    border-radius: 10px;
+    border: none;
 }
 
-.btn-success {
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f3ecec;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #FFF;
+    background-image: -webkit-linear-gradient(top, #3b0c0cc2 0%, #3b0c0cc2 50%, #3b0c0cc2 51%, #3b0c0cc2 100%);
+}
+
+.Main {
+    width: 100%;
+    background-image: url("/public/img/background.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.MainContainerr {
+    width: 130vh;
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.MainContainerr h1 {
+    color: white;
+    font-size: 2rem;
+}
+
+input[type=text] {
+    width: 100vh;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 0px 0px;
+    box-sizing: border-box;
+    transition-duration: 0.5s;
+    font-family: cairo;
+    font-weight: bold;
+}
+
+.submit {
+    width: 10%;
     color: #fff;
     background-color: #bb6b00;
     border-color: #bb6b00;
-}
-.btn {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
+    font-weight: bold;
+    font-family: cairo;
+    padding: 14px 20px;
+    margin-left: 15px;
+    border: none;
+    border-radius: 10px 10px 0px 0px;
     cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 10px 15px;
-    font-size: 15px;
-    line-height: 1.42857;
-    border-radius: 4px;
-    user-select: none;
+    display: flex;
+    justify-content: center;
+    transition-duration: 0.5s;
+    text-align: center;
+}
+
+input:hover {
+    background-color: rgb(223, 217, 217);
+    color: rgb(0, 0, 0);
+}
+
+.input {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.result {
+    width: 73%;
+    background-color: #2b1919;
+    padding: 8px 15px;
+    margin-right: 21.5vh;
+    border: 1px solid rgb(253, 253, 253);
+    border-radius: 0px 0px 10px 10px;
+    transition-duration: 0.5s;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 50vh;
+}
+
+.item {
+    margin: 5px;
+    color: rgb(255, 255, 255);
+    font-family: cairo;
+    font-weight: bold;
+    border-bottom: 2px solid wheat;
+}
+
+.result :last-child {
+    border-bottom: none;
+}
+
+@media (max-width:768px) {
+    .MainContainerr {
+        width: 100%;
+    }
+    input[type=text] {
+        width: 70%;
+    }
+    input[type=submit] {
+        width: 30%;
+    }
+    .result {
+        margin-right: 25%;
+        width: 60%;
+        font-weight: 50;
+        max-height: 30vh;
+    }
 }
