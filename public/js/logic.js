@@ -1,3 +1,5 @@
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
 function fetch(url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -61,3 +63,8 @@ function clearDivAndSet(name,Text) {
   div.innerHTML = Text;
 }
 
+
+if(module!="undefined"){
+
+  module.exports=fetch;
+}
