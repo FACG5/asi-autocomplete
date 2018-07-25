@@ -25,14 +25,16 @@ function handelhomepage(req, res) {
       png: "image/png"
     };
     res.writeHead(200, { "content-type": contenttype[extention] });
-    fs.readFile(path.join(__dirname,"..","public", endponit), function(err, file) {
+    fs.readFile(path.join(__dirname,"..", endponit), function(err, file) {
       if (err) {
         console.error(err);
       } else {
         res.end(file);
       }
     });
-  }
+  }//end serverfiles
+  
+
   function autocomplete(req,res){
 
     res.writeHead(200, { "content-type": "text/plain" });
@@ -47,7 +49,7 @@ function handelhomepage(req, res) {
   }
   function handelError(res){
       res.writeHead(404, { "content-type": "text/html" });
-      res.end("<h1>page not found --404-- </h1>");
+      res.end("<h1>--404-- Page Is Not Found --404-- </h1>");
   }
 
   module.exports = {handelError,handelhomepage,autocomplete,serverStaticFile};

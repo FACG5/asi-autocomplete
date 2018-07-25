@@ -4,11 +4,15 @@ function router(req, res) {
   let endpoint = req.url;
   if (endpoint === "/") {
     handelhomepage(req, res);
-} // end home page
-  else if (endpoint==="/autocomplete"){
-  autocomplete(req,res);
+
+} // end homepage
+
+  else if (endpoint === "/autocomplete" ){
+    autocomplete(req,res);
+  } else if (endpoint.includes("public")){      
+       serverStaticFile(req, res);
   } else {
-    serverStaticFile(req, res);
+    handelError(res)
   }
 } //end router function 
 
