@@ -2,7 +2,7 @@ var totalResult = [];
 var counter = 0;
 for (let i = 1; i <= 10; i++) {
   var apiUrl =
-    "http://extracts.panmacmillan.com/getextracts?authorcontains=a&pagenumber=" +
+    "http://extracts.panmacmillan.com/getextracts?authorcontains=b&pagenumber=" +
     i;
   fetch(apiUrl, function (result) {
     for (var j = 0; j < result.Extracts.length; j++) {
@@ -10,6 +10,7 @@ for (let i = 1; i <= 10; i++) {
     }
     counter++;
     if (counter == 10) {
+      totalResult= filterArray(totalResult)
       var loadingDiv= getElementById("loadingDiv");
       loadingDiv.style.display="none";
       var mainContainer = getElementById("MainContainerr");
