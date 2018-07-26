@@ -4,24 +4,25 @@ for (let i = 1; i <= 10; i++) {
   var apiUrl =
     "http://extracts.panmacmillan.com/getextracts?authorcontains=b&pagenumber=" +
     i;
-  fetch(apiUrl, function (result) {
-    for (var j = 0; j < result.Extracts.length; j++) {
-      totalResult.push(result.Extracts[j].author);
-    }
+  xhrRequest(apiUrl, "GET", null, function(result) {
+    result.Extracts.forEach(element => {
+      totalResult.push(element.author);
+    });
+
     counter++;
     if (counter == 10) {
-      totalResult= filterArray(totalResult)
-      var loadingDiv= getElementById("loadingDiv");
-      loadingDiv.style.display="none";
+      totalResult = filterArray(totalResult);
+      var loadingDiv = getElementById("loadingDiv");
+      loadingDiv.style.display = "none";
       var mainContainer = getElementById("MainContainerr");
-mainContainer.style.display="flex";
+      mainContainer.style.display = "flex";
 
-      sendData("/writeData", JSON.stringify(totalResult), function() {
-        fetch("/autocomplete", function(fileText) {
+      xhrRequest("/writeData", "POST", totalResult, function() {
+        xhrRequest("/autocomplete", "GET", null, function(fileText) {
           var arr = fileText;
           var input = getElementById("word");
 
-          input.addEventListener("input", function (e) {
+          input.addEventListener("input", function(e) {
             removeDiv("result");
             var result = createElement("div");
             result.setAttribute("class", "result");
@@ -30,28 +31,28 @@ mainContainer.style.display="flex";
 
             var word = this.value;
             if (!word) removeDiv("result");
-            for (let i = 0; i < arr.length; i++) {
+            arr.forEach(element => {
               var word = this.value;
               if (
-                arr[i].substr(0, word.length).toUpperCase() ==
+                element.substr(0, word.length).toUpperCase() ==
                 word.toUpperCase()
               ) {
                 var resultElemnt = createElement("div");
                 resultElemnt.setAttribute("class", "item");
-                resultElemnt.textContent = arr[i];
+                resultElemnt.textContent = element;
                 var inputElement = createElement("input");
                 inputElement.setAttribute("type", "hidden");
-                inputElement.value = arr[i];
+                inputElement.value = element;
                 resultElemnt.appendChild(inputElement);
 
-                resultElemnt.addEventListener("click", function (e) {
-                  input.value = this.getElementsByTagName("input")[0].value; //return to above resultElemnt 
+                resultElemnt.addEventListener("click", function(e) {
+                  input.value = this.getElementsByTagName("input")[0].value; //return to above resultElemnt
 
                   removeDiv("result");
                 });
                 result.appendChild(resultElemnt);
               }
-            }
+            });
           });
 
           var submit = getElementById("submit");
@@ -59,7 +60,7 @@ mainContainer.style.display="flex";
           info.setAttribute("id", "info");
           info.setAttribute("class", "modal-body");
           var modalContent = getElementById("modal-content");
-          submit.addEventListener("click", function (e) {
+          submit.addEventListener("click", function(e) {
             e.preventDefault();
 
             modalContent.appendChild(info);
@@ -68,7 +69,7 @@ mainContainer.style.display="flex";
               var url =
                 "http://extracts.panmacmillan.com/getextracts?authorcontains=" +
                 name;
-              fetch(url, function (result) {
+              xhrRequest(url, "GET", null, function(result) {
                 if (result.PageCount != 0) {
                   var authorName = result.Extracts[0].author;
                   var span = createElement("span");
@@ -76,7 +77,7 @@ mainContainer.style.display="flex";
                   span.textContent = authorName;
                   var authorBiography = result.Extracts[0].authorBiography;
                   clearDivAndSet("info", authorBiography);
-                  info.insertBefore(span, info.childNodes[0])
+                  info.insertBefore(span, info.childNodes[0]);
 
                   showModel();
                 } else {
