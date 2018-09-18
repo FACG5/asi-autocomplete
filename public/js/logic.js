@@ -1,8 +1,25 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+function xhrRequest(url, method, data, cb) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        if (method === "GET") {
+          var result = JSON.parse(xhr.responseText);
+          cb(result);
+        } else if (method === "POST") {
+          cb();
+        }
+      }
+    }
+  };
+
+  xhr.open(method, url, true);
+  xhr.send(JSON.stringify(data));
+}
 
 function fetch(url, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         var fileText = JSON.parse(xhr.responseText);
@@ -17,7 +34,7 @@ function fetch(url, cb) {
 
 function sendData(url, data, cb) {
   var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
+  xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
         cb();
@@ -47,12 +64,12 @@ function showModel() {
   var span = document.getElementsByClassName("close")[0];
 
   modal.style.display = "block";
-  window.onclick = function (event) {
+  window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
   };
-  span.onclick = function () {
+  span.onclick = function() {
     modal.style.display = "none";
   };
 }
@@ -62,13 +79,17 @@ function clearDivAndSet(name, Text) {
   div.innerHTML = Text;
 }
 
-function filterArray(array){
+function filterArray(array) {
   return array.filter(function(item, pos) {
     return array.indexOf(item) == pos;
-})
+  });
 }
 
-if (module != "undefined") {
+var filterArray = array =>
+  array.filter((item, pos) => array.indexOf(item) == pos);
+
+if (typeof module != "undefined") {
+  var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
   module.exports = fetch;
 }

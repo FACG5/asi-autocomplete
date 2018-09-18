@@ -1,25 +1,23 @@
 var {
-  serverStaticFile,
-  handelhomepage,
   autocomplete,
   handelError,
-  writeFile
-} = require("./functions.js")
+  writeFile,
+  handler
+} = require("./functions.js");
 
 function router(req, res) {
   let endpoint = req.url;
   if (endpoint === "/") {
-    handelhomepage(req, res);
-
+    handler("home", req, res);
   } else if (endpoint === "/autocomplete") {
-    autocomplete(req, res);
+    handler("autocomplete", req, res);
   } else if (endpoint === "/writeData") {
     writeFile(req, res);
   } else if (endpoint.includes("public")) {
-    serverStaticFile(req, res);
+    handler("staticfle", req, res);
   } else {
-    handelError(res)
+    handelError(res);
   }
-} //end router function 
+} //end router function
 
 module.exports = router;
